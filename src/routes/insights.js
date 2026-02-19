@@ -45,26 +45,6 @@ router.post("/bulk-add-insights", async (req, res) => {
     }
 });
 
-/**
- * GET /api/insights/:problemSlug
- * Returns insight data for a given LeetCode problem slug
- */
-router.get("/:problemSlug", async (req, res) => {
-    try {
-        const { problemSlug } = req.params;
-
-        const insight = await Insight.findById(problemSlug);
-
-        if (!insight) {
-            return res.status(404).json({ error: "Insight not found" });
-        }
-
-        res.json(insight);
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ error: "Server error" });
-    }
-});
 
 /**
  * GET /api/insights/missing/:maxNumber
@@ -98,6 +78,27 @@ router.get("/missing/:maxNumber", async (req, res) => {
             missingNumbers,
             missingCount: missingNumbers.length
         });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Server error" });
+    }
+});
+
+/**
+ * GET /api/insights/:problemSlug
+ * Returns insight data for a given LeetCode problem slug
+ */
+router.get("/:problemSlug", async (req, res) => {
+    try {
+        const { problemSlug } = req.params;
+
+        const insight = await Insight.findById(problemSlug);
+
+        if (!insight) {
+            return res.status(404).json({ error: "Insight not found" });
+        }
+
+        res.json(insight);
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: "Server error" });

@@ -2,6 +2,14 @@ const express = require("express");
 const router = express.Router();
 const Insight = require("../models/insightSchema.js");
 
+
+router.use((req, res, next) => {
+    console.log("METHOD:", req.method, "URL:", req.originalUrl);
+    next();
+});
+
+
+
 /**
  * POST /api/insights/bulk-add-insights
  * Body: Array of insight objects following the Insight schema

@@ -23,7 +23,9 @@ app.get("/hello", (req, res) => {
     res.json({ message: "Hello from API" });
 });
 
-const PORT = 3000 || process.env.PORT
+// const PORT = 3000 || process.env.PORT
+const PORT = process.env.PORT || 3000;
+
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });

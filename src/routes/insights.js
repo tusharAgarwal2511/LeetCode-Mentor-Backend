@@ -7,7 +7,7 @@ const Insight = require("../models/insightSchema.js");
  * Body: Array of insight objects following the Insight schema
  * Adds each insight to the database, overwriting existing ones if _id exists
  */
-router.post("/bulk-add-insights", async (req, res) => {
+router.post("/add/bulk-add-insights", async (req, res) => {
     const apiKey = req.header("x-api-key");
     if (apiKey !== process.env.API_KEY) {
         return res.status(401).json({ error: "Unauthorized" });
@@ -88,7 +88,7 @@ router.get("/missing/:maxNumber", async (req, res) => {
  * GET /api/insights/:problemSlug
  * Returns insight data for a given LeetCode problem slug
  */
-router.get("/:problemSlug", async (req, res) => {
+router.get("/problem/:problemSlug", async (req, res) => {
     try {
         const { problemSlug } = req.params;
 

@@ -5,6 +5,9 @@ const insightsRoute = require("./src/routes/insights");
 const cors = require("cors");
 
 const app = express();
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 dotenv.config();
 app.use(cors({
     origin: "*",  
@@ -20,7 +23,7 @@ app.get("/hello", (req, res) => {
     res.json({ message: "Hello from API" });
 });
 
-const PORT = 3000 || process.env.PORT;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
